@@ -89,7 +89,7 @@ def simple_sigs(sigdict):
     are included.
     """
     simple = {}
-    for psig in sigdict.values():
+    for psig in list(sigdict.values()):
         if (psig['returntype'] == 'double' and
                 all([t == 'double' for t in psig['argtypes']])):
             n = len(psig['argtypes'])
@@ -97,7 +97,7 @@ def simple_sigs(sigdict):
                 simple[n].append(psig['name'])
             else:
                 simple[n] = [psig['name']]
-    for key, value in simple.items():
+    for key, value in list(simple.items()):
         value.sort()
 
     return simple
@@ -110,7 +110,7 @@ def get_simple_sig_dict(srcdir='src'):
 
 def complex_sigdict(sigdict):
     out = {}
-    for key, psig in sigdict.items():
+    for key, psig in list(sigdict.items()):
         if (psig['returntype'] == 'double' and
                 all([t == 'double' for t in psig['argtypes']])):
             continue
@@ -125,7 +125,7 @@ def get_complex_sigdict(srcdir='src'):
 def get_complex_scalar_sigdict(srcdir='src'):
     cd = get_complex_sigdict(srcdir=srcdir)
     scalar_dict = {}
-    for k, v in cd.items():
+    for k, v in list(cd.items()):
         if v['returntype'] == 'void' and 'int' not in v['argtypes']:
             scalar_dict[k] = v
     return scalar_dict
@@ -133,7 +133,7 @@ def get_complex_scalar_sigdict(srcdir='src'):
 def get_complex_scalar_dict_by_nargs_nreturns(srcdir='src'):
     sd = get_complex_scalar_sigdict(srcdir=srcdir)
     names_by_sigtup = {}
-    for k, v in sd.items():
+    for k, v in list(sd.items()):
         nargs = 0
         nrets = 0
         for arg in v['argtuple']:
@@ -150,15 +150,15 @@ def get_complex_scalar_dict_by_nargs_nreturns(srcdir='src'):
 
 def print_complex_names_by_nargs_nreturns(srcdir='src'):
     d = get_complex_scalar_dict_by_nargs_nreturns(srcdir=srcdir)
-    for k, v in d.items():
-        print(k, len(v))
+    for k, v in list(d.items()):
+        print((k, len(v)))
         for name in v:
-            print('    %s' % name)
+            print(('    %s' % name))
 
 def print_non_wrappable(srcdir='src'):
     csd = get_complex_sigdict(srcdir=srcdir)
     scd = get_complex_scalar_sigdict(srcdir=srcdir)
     others = [f for f in csd if f not in scd]
     othersd = {k : csd[k] for k in others}
-    for k, v in othersd.items():
-        print(k, v['argstring'], v['returntype'])
+    for k, v in list(othersd.items()):
+        print((k, v['argstring'], v['returntype']))

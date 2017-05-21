@@ -30,7 +30,7 @@ def cfcf(request):
 
 def test_mechanism(cfcf):
     cv, cf, mfunc = cfcf
-    print("<%s>" % mfunc.name)
+    print(("<%s>" % mfunc.name))
     def value_from_name(vname):
         b, name = vname.split('.')
         if b == 'cf':
@@ -71,16 +71,16 @@ def test_mechanism(cfcf):
             try:
                 assert_allclose(expected, found, atol=tolerance)
             except TypeError:
-                print(mfunc.test_varstrings[3*i+3], tolerance.shape)
-                print(mfunc.test_varstrings)
+                print((mfunc.test_varstrings[3*i+3], tolerance.shape))
+                print((mfunc.test_varstrings))
         # The following is not right, but this step is unimportant.
         #set_from_name(mfunc.test_varstrings[0], expected - found)
 
     else:
-        print(">>%s<<" % mfunc.testline)
+        print((">>%s<<" % mfunc.testline))
         print("missing mfunc.test_varstrings")
         mfunc.run()
         if hasattr(mfunc, 'exception'):
-            print(">>>%s<<<", mfunc.exception)
+            print((">>>%s<<<", mfunc.exception))
         else:
             assert mfunc.passed

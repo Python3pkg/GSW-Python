@@ -85,7 +85,7 @@ def indexer(shape, axis, order='C'):
     kmax = np.prod(ind_shape)
 
     if order == 'C':
-        index_position = list(reversed(range(ndim)))
+        index_position = list(reversed(list(range(ndim))))
     else:
         index_position = list(range(ndim))
 
@@ -222,7 +222,7 @@ class Bunch(dict):
             newkw.update(d)
         newkw.update(kw)
         self._check_strict(strict, newkw)
-        dsub = dict([(k, v) for (k, v) in newkw.items() if k in self])
+        dsub = dict([(k, v) for (k, v) in list(newkw.items()) if k in self])
         self.update(dsub)
 
     def update_None(self, *args, **kw):
@@ -236,7 +236,7 @@ class Bunch(dict):
             newkw.update(d)
         newkw.update(kw)
         self._check_strict(strict, newkw)
-        dsub = dict([(k, v) for (k, v) in newkw.items()
+        dsub = dict([(k, v) for (k, v) in list(newkw.items())
                                 if k in self and self[k] is None])
         self.update(dsub)
 

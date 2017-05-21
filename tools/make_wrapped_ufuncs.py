@@ -56,8 +56,8 @@ def get_argnames(ufname):
     mnames = msig.argnames[:]
     nc, nm = len(cnames), len(mnames)
     if nc < nm:
-        print('%s: truncating argument list, %s, %s' % (
-                ufname, cnames, mnames))
+        print(('%s: truncating argument list, %s, %s' % (
+                ufname, cnames, mnames)))
         mnames = mnames[:nc]
 
     argnames = []
@@ -165,7 +165,7 @@ def uf_wrapper(ufname):
         sections['Returns'] = outdoc
         doc = docstring_from_sections(sections)
     except KeyError as e:
-        print("KeyError for %s, %s" % (ufname, e))
+        print(("KeyError for %s, %s" % (ufname, e)))
         doc = "(no description available)"
     subs['doc'] = doc
     return wrapper_template % subs
@@ -191,9 +191,9 @@ if __name__ == '__main__':
                 if wrapped is None:
                     continue
             except RuntimeError as err:
-                print(ufname, err)
+                print((ufname, err))
             if wrapped is None:
-                print("failed:", ufname)
+                print(("failed:", ufname))
             else:
                 f.write(wrapped)
                 wrapped_ufnames.append(ufname)

@@ -197,7 +197,7 @@ def write_modfile(modfile_name, srcdir):
     funcnamelist1 = []
     funcnamelist2 = []
 
-    nins = range(1, 6)
+    nins = list(range(1, 6))
     artups = [(2, 2), (3, 2), (3, 3), (6, 2), (2, 3), (4, 3), (5, 3), (3, 5)]
 
     modfile_head_parts = [modfile_head_top]

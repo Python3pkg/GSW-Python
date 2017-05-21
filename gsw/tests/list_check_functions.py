@@ -29,9 +29,9 @@ missingnames = sorted([mf.name for mf in missingnames])
 
 print('Functions being checked:')
 for i, name in enumerate(mfuncnames):
-    print(i, name)
+    print((i, name))
 
 print('Functions not in gsw:')
 for i, name in enumerate(missingnames):
-    print(i, name)
+    print((i, name))
 
